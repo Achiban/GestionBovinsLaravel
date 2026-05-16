@@ -1,0 +1,11 @@
+{
+  "build": [
+    "cp .env.example .env || true",
+    "composer install --no-interaction --optimize-autoloader --no-dev --no-scripts",
+    "php artisan key:generate --ansi || true",
+    "# Ensure app can bootstrap so Wayfinder can generate files",
+    "php artisan wayfinder:generate --with-form || php artisan wayfinder:generate || true",
+    "npm ci --silent",
+    "npm run build"
+  ]
+}
