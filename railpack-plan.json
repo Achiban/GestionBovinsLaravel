@@ -1,0 +1,15 @@
+{
+  "image": "docker.io/dunglas/frankenphp:php8.4-bookworm",
+  "install": {
+    "composer": true,
+    "node": true
+  },
+  "build": [
+    "cp .env.example .env || true",
+    "composer install --optimize-autoloader --no-scripts --no-interaction",
+    "php artisan key:generate --ansi || true",
+    "php artisan wayfinder:generate --with-form || php artisan wayfinder:generate || true",
+    "npm ci --silent",
+    "npm run build"
+  ]
+}
